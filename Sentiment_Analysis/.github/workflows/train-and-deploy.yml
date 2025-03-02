@@ -46,9 +46,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-     - name: Generate Google Colab link
+    - name: Generate Google Colab link
       run: |
         echo "Il modello ha bisogno di un retraining! 🚨"
         echo "Eseguo il training su Google Colab:"
         echo "[Clicca qui per avviare il training](https://colab.research.google.com/drive/1bTM0NaIW_rvumG3TsWcukXC8DDqSchyr#scrollTo=YzV_MAbJvdRG/Train_model_AnalysSentiment.ipynb)"
-        
+

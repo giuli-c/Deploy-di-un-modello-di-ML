@@ -44,3 +44,4 @@ def test_model(text, sentiment_classes=LIST_SENTIMENT):
 if __name__ == "__main__":
     text = "Covid cases are increasing fast!"
     print(f"Testo: {text} → Sentiment: {test_model(text)}")
+    
