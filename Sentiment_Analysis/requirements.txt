@@ -4,3 +4,5 @@ datasets
 pandas
 scikit-learn
 random
+mlflow
+huggingface_hub

@@ -11,11 +11,12 @@ permissions:
   contents: read
 
 jobs:
-  train-and-deploy:
+  test-model:
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
@@ -34,8 +35,19 @@ jobs:
     - name: Test the model
         run: |
           python src/test_model.py
-        - name: Deploy to Hugging Face
-        env:
-          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        
+    - name: Save training decision
+        id: check_training
+        run: echo "::set-output name=training_required::$(cat training_required.txt)"
+
+  train-model:
+    needs: test-model
+    if: steps.check_training.outputs.training_required == 'YES'  # <-- CONDIZIONE
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: Generate Google Colab link
         run: |
-          python src/deploy.py
+          echo "Il modello ha bisogno di un retraining! 🚨"
+          echo "Eseguo il training su Google Colab:"
+          echo "[Clicca qui per avviare il training](https://colab.research.google.com/drive/1bTM0NaIW_rvumG3TsWcukXC8DDqSchyr#scrollTo=YzV_MAbJvdRG/Train_model_AnalysSentiment.ipynb)"

@@ -1,13 +1,13 @@
 """
 Caricamento del modello e inferenza sui testi.
 """
-from transformers import AutoModelForSequenceClassification, AutoTokenizer, AutoConfig
+from transformers import AutoModelForSequenceClassification, AutoTokenizer, AutoConfig, Trainer, TrainingArguments
 import torch
 
 MODEL_NAME = f"cardiffnlp/twitter-roberta-base-sentiment-latest"
 LIST_SENTIMENT = ["Negative", "Neutral", "Positive"]
 
-# 1.  SCARICO IL MODELLO 
+# 1.  CARICO IL MODELLO e il TOKENIZER
 tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
 config = AutoConfig.from_pretrained(MODEL_NAME)
 model = AutoModelForSequenceClassification.from_pretrained(MODEL_NAME)
