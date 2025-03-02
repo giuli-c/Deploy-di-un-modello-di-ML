@@ -33,12 +33,12 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test the model
-        run: |
-          python src/test_model.py
+      run: |
+        python src/test_model.py
         
     - name: Save training decision
-        id: check_training
-        run: echo "::set-output name=training_required::$(cat training_required.txt)"
+      id: check_training
+      run: echo "::set-output name=training_required::$(cat training_required.txt)"
 
   train-model:
     needs: test-model
@@ -47,7 +47,8 @@ jobs:
 
     steps:
      - name: Generate Google Colab link
-        run: |
-          echo "Il modello ha bisogno di un retraining! 🚨"
-          echo "Eseguo il training su Google Colab:"
-          echo "[Clicca qui per avviare il training](https://colab.research.google.com/drive/1bTM0NaIW_rvumG3TsWcukXC8DDqSchyr#scrollTo=YzV_MAbJvdRG/Train_model_AnalysSentiment.ipynb)"
+      run: |
+        echo "Il modello ha bisogno di un retraining! 🚨"
+        echo "Eseguo il training su Google Colab:"
+        echo "[Clicca qui per avviare il training](https://colab.research.google.com/drive/1bTM0NaIW_rvumG3TsWcukXC8DDqSchyr#scrollTo=YzV_MAbJvdRG/Train_model_AnalysSentiment.ipynb)"
+        
