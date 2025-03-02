@@ -1,7 +1,6 @@
 """
 CLASSE PER VERIFICARE SE IL MODELLO FA DELLE PREVISIONI CORRETTE.
 """
-import pandas as pd
 import random
 from datasets import load_dataset
 from model import test_model
