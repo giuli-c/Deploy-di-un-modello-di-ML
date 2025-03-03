@@ -30,7 +30,7 @@ jobs:
         pip install "multiprocess<0.70.17"
         pip install "dill<0.3.9"
         pip install xxhash
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        pip install -r requirements.txt
     - name: Check installed packages
       run: |
         pip list
@@ -41,7 +41,7 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
+    - name: Run Tests
       working-directory: Sentiment_Analysis/test
       run: |
-        pytest
+        python test_model.py
