@@ -3,7 +3,7 @@ import os
 import mlflow
 import mlflow.pyfunc
 from model import tokenizer, model
-from test_model import dataset
+from Sentiment_Analysis.test.test_model import dataset
 from transformers import TrainingArguments, Trainer
 from huggingface_hub import HfApi
 

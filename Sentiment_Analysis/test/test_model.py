@@ -3,9 +3,9 @@ CLASSE PER VERIFICARE SE IL MODELLO FA DELLE PREVISIONI CORRETTE.
 """
 import random
 from datasets import load_dataset
-from model import test_model
+from ..src.model import test_model
 from sklearn.metrics import classification_report, accuracy_score, confusion_matrix
-from train_model import train
+#from train_model import train
 
 # Carico il dataset di test da Hugging Face
 dataset = load_dataset("cardiffnlp/tweet_sentiment_multilingual", "italian")
@@ -45,9 +45,9 @@ print(f"Accuratezza: {accuracy:.2f}")
 print("\nReport di classificazione:")
 print(report)
 
-THRESHOLD_ACCURACY = 0.85
-training_required = "YES" if accuracy < THRESHOLD_ACCURACY else "NO"
+# THRESHOLD_ACCURACY = 0.85
+# training_required = "YES" if accuracy < THRESHOLD_ACCURACY else "NO"
 
-# Uso un file di testo per salvare i risultati e sapere se devo fare il retrain del modello
-with open("training_required.txt", "w") as f:
-    f.write(training_required)
+# # Uso un file di testo per salvare i risultati e sapere se devo fare il retrain del modello
+# with open("training_required.txt", "w") as f:
+#     f.write(training_required)
