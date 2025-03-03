@@ -1,21 +1,24 @@
 # This workflow will install Python dependencies, run tests and lint with a single version of Python
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-python
 
-name: Train and Deploy Model
+name: continuos integration
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-    
+
+permissions:
+  contents: read
+
 jobs:
-  test-model:
-    runs-on: ubuntu-latest
+  build:
+
+    runs-on: Test
 
     steps:
     - uses: actions/checkout@v4
-
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
       with:
@@ -26,28 +29,13 @@ jobs:
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
+      working-directory: src
       run: |
         # stop the build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test the model
+      working-directory: src
       run: |
         python src/test_model.py
-        
-    # - name: Save training decision
-    #   id: check_training
-    #   run: echo "::set-output name=training_required::$(cat training_required.txt)"
-
-  # train-model:
-  #   needs: test-model
-  #   if: steps.check_training.outputs.training_required == 'YES'  # <-- CONDIZIONE
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #   - name: Generate Google Colab link
-  #     run: |
-  #       echo "Il modello ha bisogno di un retraining! 🚨"
-  #       echo "Eseguo il training su Google Colab:"
-  #       echo "[Clicca qui per avviare il training](https://colab.research.google.com/drive/1bTM0NaIW_rvumG3TsWcukXC8DDqSchyr#scrollTo=YzV_MAbJvdRG/Train_model_AnalysSentiment.ipynb)"
-
