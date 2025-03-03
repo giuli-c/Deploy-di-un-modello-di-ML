@@ -3,4 +3,3 @@ transformers
 pandas
 scikit-learn
 mlflow
-huggingface_hub
