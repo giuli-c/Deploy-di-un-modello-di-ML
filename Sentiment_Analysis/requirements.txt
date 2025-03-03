@@ -1,13 +1,9 @@
 torch
 transformers
-datasets --no-deps
 pandas
 scikit-learn
 random
 mlflow
-multiprocess<0.70.17
-dill<0.3.9
-xxhash
 random
 mlflow
 huggingface_hub
